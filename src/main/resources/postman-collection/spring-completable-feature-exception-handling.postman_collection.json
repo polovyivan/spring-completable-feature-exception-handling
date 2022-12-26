@@ -1,0 +1,125 @@
+{
+	"info": {
+		"_postman_id": "53cf5d1f-91b8-4e5b-bd16-46e31d86313f",
+		"name": "spring-completable-feature-exception-handling",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9825253"
+	},
+	"item": [
+		{
+			"name": "/customers/using-exceptionally/{customerId}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/spring-completable-feature-exception-handling/v1/customers/using-exceptionally/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"spring-completable-feature-exception-handling",
+						"v1",
+						"customers",
+						"using-exceptionally",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/customers/using-handler/{customerId}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/spring-completable-feature-exception-handling/v1/customers/using-handler/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"spring-completable-feature-exception-handling",
+						"v1",
+						"customers",
+						"using-handler",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/customers/using-when-complete/{customerId}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/spring-completable-feature-exception-handling/v1/customers/using-when-complete/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"spring-completable-feature-exception-handling",
+						"v1",
+						"customers",
+						"using-when-complete",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/customers/timeout/{customerId}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/spring-completable-feature-exception-handling/v1/customers/timeout/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"spring-completable-feature-exception-handling",
+						"v1",
+						"customers",
+						"timeout",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/customers/complete-on-timeout/{customerId}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/spring-completable-feature-exception-handling/v1/customers/complete-on-timeout/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"spring-completable-feature-exception-handling",
+						"v1",
+						"customers",
+						"complete-on-timeout",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
