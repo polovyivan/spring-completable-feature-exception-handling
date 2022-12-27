@@ -19,6 +19,11 @@ public class CustomerController {
         return customerService.getCustomerByIdUsingExceptionally(customerId);
     }
 
+    @GetMapping("/using-exceptionally-rethrow/{customerId}")
+    public CustomerResponse getCustomerByIdUsingException(@PathVariable Integer customerId) {
+        return customerService.getCustomerByIdUsingExceptionallyRethrow(customerId);
+    }
+
     @GetMapping("/using-handler/{customerId}")
     public CustomerResponse getCustomerByIdUsingHandle(@PathVariable Integer customerId) {
         return customerService.getCustomerByIdUsingHandle(customerId);

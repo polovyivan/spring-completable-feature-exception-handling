@@ -12,7 +12,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/spring-completable-feature-exception-handling/v1/customers/using-exceptionally/1",
+					"raw": "http://localhost:8080/spring-completable-feature-exception-handling/v1/customers/using-exceptionally/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -23,7 +23,30 @@
 						"v1",
 						"customers",
 						"using-exceptionally",
-						"1"
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/customers/using-exceptionally-rethrow/{customerId}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/spring-completable-feature-exception-handling/v1/customers/using-exceptionally-rethrow/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"spring-completable-feature-exception-handling",
+						"v1",
+						"customers",
+						"using-exceptionally-rethrow",
+						"2"
 					]
 				}
 			},
@@ -58,7 +81,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/spring-completable-feature-exception-handling/v1/customers/using-when-complete/2",
+					"raw": "http://localhost:8080/spring-completable-feature-exception-handling/v1/customers/using-when-complete/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -69,7 +92,7 @@
 						"v1",
 						"customers",
 						"using-when-complete",
-						"2"
+						"1"
 					]
 				}
 			},
@@ -81,7 +104,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/spring-completable-feature-exception-handling/v1/customers/timeout/2",
+					"raw": "http://localhost:8080/spring-completable-feature-exception-handling/v1/customers/timeout/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -92,7 +115,7 @@
 						"v1",
 						"customers",
 						"timeout",
-						"2"
+						"1"
 					]
 				}
 			},
