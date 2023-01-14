@@ -19,7 +19,7 @@ public record CustomerService(
         CustomerClient customerClient,
         PurchaseTransactionClient purchaseTransactionClient) {
 
-    public CustomerResponse getCustomerByIdUsingExceptionally(Integer customerId) {
+    public CompletableFuture<CustomerResponse> getCustomerByIdUsingExceptionally(Integer customerId) {
         log.info("Getting customer by id {} using exceptionally.", customerId);
         CompletableFuture<CustomerResponse> customerResponseCF = CompletableFuture.supplyAsync(
                 () -> CustomerResponse.valueOf(customerClient.getCustomerById(customerId)));
@@ -33,16 +33,15 @@ public record CustomerService(
                     log.error("Received exception {}, returning empty list.", ex.getMessage());
                     return Set.of();
                 });
-        CompletableFuture<CustomerResponse> customerResponseCompletableFuture = customerResponseCF
+        return customerResponseCF
                 .thenCombine(purchaseTransactionsCF, (customerResponse, purchaseTransactions) -> {
                     customerResponse.setPurchaseTransactions(purchaseTransactions);
                     return customerResponse;
                 });
-        CustomerResponse response = customerResponseCompletableFuture.join();
-        return response;
     }
 
-    public CustomerResponse getCustomerByIdUsingExceptionallyRethrow(Integer customerId) {
+
+    public CompletableFuture<CustomerResponse> getCustomerByIdUsingExceptionallyRethrow(Integer customerId) {
         log.info("Getting customer by id {} using exceptionally and rethrow.", customerId);
         CompletableFuture<CustomerResponse> customerResponseCF = CompletableFuture.supplyAsync(
                 () -> CustomerResponse.valueOf(customerClient.getCustomerById(customerId)));
@@ -56,16 +55,14 @@ public record CustomerService(
                     log.error("Received exception {}, throwing new exception!", ex.getMessage());
                     throw new IllegalArgumentException();
                 });
-        CompletableFuture<CustomerResponse> customerResponseCompletableFuture = customerResponseCF
+        return customerResponseCF
                 .thenCombine(purchaseTransactionsCF, (customerResponse, purchaseTransactions) -> {
                     customerResponse.setPurchaseTransactions(purchaseTransactions);
                     return customerResponse;
                 });
-        CustomerResponse response = customerResponseCompletableFuture.join();
-        return response;
     }
 
-    public CustomerResponse getCustomerByIdUsingHandle(Integer customerId) {
+    public CompletableFuture<CustomerResponse> getCustomerByIdUsingHandle(Integer customerId) {
         log.info("Getting customer by id {} using handle.", customerId);
         CompletableFuture<CustomerResponse> customerResponseCF = CompletableFuture.supplyAsync(
                 () -> CustomerResponse.valueOf(customerClient.getCustomerById(customerId)));
@@ -83,16 +80,15 @@ public record CustomerService(
                     }
                     return response;
                 });
-        CompletableFuture<CustomerResponse> customerResponseCompletableFuture = customerResponseCF
+        return customerResponseCF
                 .thenCombine(purchaseTransactionsCF, (customerResponse, purchaseTransactions) -> {
                     customerResponse.setPurchaseTransactions(purchaseTransactions);
                     return customerResponse;
                 });
-        CustomerResponse response = customerResponseCompletableFuture.join();
-        return response;
+
     }
 
-    public CustomerResponse getCustomerByIdUsingWhenComplete(Integer customerId) {
+    public CompletableFuture<CustomerResponse> getCustomerByIdUsingWhenComplete(Integer customerId) {
         log.info("Getting customer by id {} using when complete.", customerId);
         CompletableFuture<CustomerResponse> customerResponseCF = CompletableFuture.supplyAsync(
                 () -> CustomerResponse.valueOf(customerClient.getCustomerById(customerId)));
@@ -108,16 +104,14 @@ public record CustomerService(
                         log.error("Received exception {}, throwing exception to consumer", ex.getMessage());
                     }
                 });
-        CompletableFuture<CustomerResponse> customerResponseCompletableFuture = customerResponseCF
+        return customerResponseCF
                 .thenCombine(purchaseTransactionsCF, (customerResponse, purchaseTransactions) -> {
                     customerResponse.setPurchaseTransactions(purchaseTransactions);
                     return customerResponse;
                 });
-        CustomerResponse response = customerResponseCompletableFuture.join();
-        return response;
     }
 
-    public CustomerResponse getCustomerByIdWithOrTimeout(Integer customerId) {
+    public CompletableFuture<CustomerResponse> getCustomerByIdWithOrTimeout(Integer customerId) {
         log.info("Getting customer by id {} with orTimeout", customerId);
         int timeOut = getTimeOut(customerId);
         log.info("CF timeout is {}", timeOut);
@@ -130,16 +124,14 @@ public record CustomerService(
                                 .map(PurchaseTransactionResponse::valueOf)
                                 .collect(Collectors.toSet()))
                 .orTimeout(timeOut, TimeUnit.SECONDS);
-        CompletableFuture<CustomerResponse> customerResponseCompletableFuture = customerResponseCF
+       return customerResponseCF
                 .thenCombine(purchaseTransactionsCF, (customerResponse, purchaseTransactions) -> {
                     customerResponse.setPurchaseTransactions(purchaseTransactions);
                     return customerResponse;
                 });
-        CustomerResponse response = customerResponseCompletableFuture.join();
-        return response;
     }
 
-    public CustomerResponse getCustomerByIdWithCompleteOnTimeout(Integer customerId) {
+    public CompletableFuture<CustomerResponse> getCustomerByIdWithCompleteOnTimeout(Integer customerId) {
         log.info("Getting customer by id {} with completeOnTimeout.", customerId);
         int timeOut = getTimeOut(customerId);
         log.info("CF timeout is {}", timeOut);
@@ -152,13 +144,11 @@ public record CustomerService(
                                 .map(PurchaseTransactionResponse::valueOf)
                                 .collect(Collectors.toSet()))
                 .completeOnTimeout(Set.of(), timeOut, TimeUnit.SECONDS);
-        CompletableFuture<CustomerResponse> customerResponseCompletableFuture = customerResponseCF
+       return customerResponseCF
                 .thenCombine(purchaseTransactionsCF, (customerResponse, purchaseTransactions) -> {
                     customerResponse.setPurchaseTransactions(purchaseTransactions);
                     return customerResponse;
                 });
-        CustomerResponse response = customerResponseCompletableFuture.join();
-        return response;
     }
 
     private static int getTimeOut(Integer customerId) {
